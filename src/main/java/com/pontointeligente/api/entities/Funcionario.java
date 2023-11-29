@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 import com.pontointeligente.api.enums.PerfilEnum;
 
@@ -21,6 +22,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
 import lombok.Data;
 
 @Data
@@ -46,12 +48,15 @@ public class Funcionario implements Serializable {
 	@Column(name = "cpf", nullable = false)
 	private String cpf;
 
+	@Transient
 	@Column(name = "valor_hora")
 	private BigDecimal valorHora;
 
+	@Transient
 	@Column(name = "qtd_horas_trabalho_dia")
 	private Float qtdHorasTrabalhoDia;
 
+	@Transient
 	@Column(name = "qtd_horas_almoco")
 	private Float qtdHorasAlmoco;
 
@@ -73,4 +78,17 @@ public class Funcionario implements Serializable {
 
 	@OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
 	private List<Lancamento> lancamentos;
+	
+	
+	public Optional<Float> getQtdHorasTrabalhoDiaOpt() {
+        return Optional.ofNullable(qtdHorasTrabalhoDia);
+    }
+
+    public Optional<Float> getQtdHorasAlmocoOpt() {
+        return Optional.ofNullable(qtdHorasAlmoco);
+    }
+
+    public Optional<BigDecimal> getValorHoraOpt() {
+        return Optional.ofNullable(valorHora);
+    }
 }

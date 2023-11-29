@@ -1,7 +1,7 @@
 package com.pontointeligente.api.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import com.pontointeligente.api.enums.TipoEnum;
 
